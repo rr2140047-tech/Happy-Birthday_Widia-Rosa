@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Selamat Ulang Tahun Widia Rosa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+  background:url('foto.jpg') no-repeat center center fixed;
+  background-size:cover;
+}
+
+/* MODE MALAM + OVERLAY */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top, rgba(20,30,60,0.6), rgba(0,0,0,0.85));
+  backdrop-filter: blur(4px);
+  z-index:-1;
+}
+
+h1{margin-top:26px;font-size:2.2em}
+
+.name{
+  font-size:2.5em;
+  font-weight:600;
+  background:linear-gradient(90deg,#ffe8a3,#ffffff,#ffe8a3);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shimmer 6s infinite linear;
+}
+
+@keyframes shimmer{from{background-position:0%}to{background-position:200%}}
+
+.date{margin-top:6px;color:#ffd369;font-size:1.1em}
+
+p{
+  max-width:85%;
+  margin:18px auto;
+  line-height:1.8;
+  font-size:1.05em;
+  opacity:0;
+  animation:fadeUp 2s forwards;
+}
+
+p:nth-of-type(1){animation-delay:1s}
+p:nth-of-type(2){animation-delay:2.6s}
+p:nth-of-type(3){animation-delay:4.2s}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* PENARI */
+.dancer{
+  font-size:72px;
+  margin:18px 0;
+  animation:danceSoft 5s infinite ease-in-out;
+}
+
+@keyframes danceSoft{
+  0%{transform:translateY(0) rotate(0deg)}
+  25%{transform:translateY(-7px) rotate(3deg)}
+  50%{transform:translateY(0)}
+  75%{transform:translateY(-7px) rotate(-3deg)}
+  100%{transform:translateY(0)}
+}
+
+/* KUE */
+.cake{margin:28px auto;width:140px;animation:float 4.5s infinite ease-in-out}
+.layer{height:34px;background:#ffb6c1;border-radius:8px;margin:3px 0}
+.candle{width:6px;height:30px;background:white;margin:auto;position:relative}
+.flame{width:12px;height:12px;background:orange;border-radius:50%;position:absolute;top:-12px;left:-3px;box-shadow:0 0 12px orange;animation:flicker .8s infinite alternate}
+
+@keyframes flicker{from{transform:scale(1)}to{transform:scale(1.3)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* BALON BERCAHAYA */
+.balloon{
+  position:fixed;
+  bottom:-120px;
+  width:40px;
+  height:56px;
+  border-radius:50%;
+  animation:fly 18s linear infinite;
+  opacity:.9;
+  box-shadow:0 0 18px rgba(255,255,255,0.6);
+}
+.balloon::after{content:"";position:absolute;width:2px;height:42px;background:white;left:50%;top:56px}
+@keyframes fly{to{transform:translateY(-160vh);opacity:0}}
+
+/* KEMBANG API */
+.firework{position:fixed;width:6px;height:6px;border-radius:50%;animation:boom 2.4s ease-out}
+@keyframes boom{0%{transform:scale(0);opacity:1}100%{transform:scale(26);opacity:0}}
+
+footer{margin:36px 10px 24px;font-size:.95em;opacity:.85}
+</style></head><body><h1>🎉 Selamat Ulang Tahun ke-19 🎉</h1>
+<div class="name">Widia Rosa</div>
+<div class="date">📅 21 Desember</div><div class="dancer">💃</div><p>
+Di hari yang lembut ini,
+semoga senyum yang kamu bawa
+selalu menemukan alasannya untuk tinggal lebih lama.
+Ada cahaya dalam caramu bermimpi,
+dan kamu menjalaninya dengan anggun.
+</p><p>
+Tetaplah berjalan dengan tenang.
+Kuliahmu adalah perjalanan,
+tarianmu adalah bahasa hati.
+Setiap latihan dan usaha kecil
+sedang membentukmu menjadi <b>penari hebat</b>.
+</p><p>
+Tidak perlu terburu-buru.
+Nikmati setiap prosesnya.
+Hal-hal indah selalu datang
+kepada mereka yang setia pada mimpi.
+</p><div class="cake">
+  <div class="candle"><div class="flame"></div></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+</div><footer>
+🎂 Semoga hari ini terasa hangat, manis, dan berkesan 🎂
+</footer><audio id="bgm" loop>
+  <source src="musik.mp3" type="audio/mpeg">
+</audio><button id="playMusic">🎵 Putar Musik</button>
+
+<script>
+/* ================= ANIMASI ================= */
+// BALON BERCAHAYA
+for(let i=0;i<14;i++){
+  let b=document.createElement("div");
+  b.className="balloon";
+  b.style.left=Math.random()*100+"vw";
+  b.style.background=`hsl(${Math.random()*360},65%,60%)`;
+  b.style.animationDuration=(14+Math.random()*6)+"s";
+  document.body.appendChild(b);
+}
+
+// KEMBANG API LEMBUT
+setInterval(()=>{
+  let f=document.createElement("div");
+  f.className="firework";
+  f.style.left=Math.random()*100+"vw";
+  f.style.top=Math.random()*55+"vh";
+  f.style.background=`hsl(${Math.random()*360},80%,65%)`;
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),2200);
+},1100);
+
+/* ================= MUSIK FADE-IN ================= */
+const audio = document.getElementById("bgm");
+const btn = document.getElementById("playMusic");
+
+btn.addEventListener("click", () => {
+  audio.volume = 0;
+  audio.play();
+  btn.style.display = "none";
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    if (vol < 0.85) {
+      vol += 0.02;
+      audio.volume = vol;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+});
+</script><style>
+#playMusic{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  font-size:1em;
+  background:rgba(255,255,255,0.15);
+  color:white;
+  backdrop-filter:blur(6px);
+  box-shadow:0 0 18px rgba(255,255,255,0.4);
+}
+</style></body>
+</html>
